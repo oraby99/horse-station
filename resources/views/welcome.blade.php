@@ -51,7 +51,9 @@
             @foreach ($ads as $ad)
             <div class="col-sm-3">
               <div class="card">
+                @if ($ad->images && count($ad->images) > 0)
                 <img src="{{ asset('uploads/advertisments/' . $ad->images[0]) }}" class="card-img-top" alt="...">
+                @endif
 
                             <div class="card-body">
                     <h5 class="card-title">{{$ad->name}}</h5>
