@@ -51,7 +51,7 @@
             @foreach ($ads as $ad)
             <div class="col-sm-3">
               <div class="card">
-                <img src="{{ asset('uploads/advertisments/' . $prd->images[0]) }}" class="card-img-top" alt="...">
+                <img src="{{ asset('uploads/advertisments/' . $ad->images[0]) }}" class="card-img-top" alt="...">
 
                             <div class="card-body">
                     <h5 class="card-title">{{$ad->name}}</h5>
