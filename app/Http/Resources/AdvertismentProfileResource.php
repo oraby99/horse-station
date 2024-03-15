@@ -17,13 +17,6 @@ class AdvertismentProfileResource extends JsonResource
     public function toArray(Request $request): array
     {
         $plan = Plan::find($this->plan_id);
-        $images = json_decode($this->images); // Decode the JSON array of images
-        $dataImages = [];
-        if (!empty($images)) {
-            foreach ($images as $image) {
-                $dataImages[] = asset('uploads/advertisments/' . $image);
-            }
-        }
         $expire_at = $plan ? Carbon::parse($this->updated_at)->addMonths($plan->time)->format('Y-m-d') : null;
 
         return [
@@ -34,7 +27,7 @@ class AdvertismentProfileResource extends JsonResource
             'type' => 'advertisment',
             'expire_at' => $this->is_expire ? null : $expire_at,
             'is_sold' => $this->is_sold,
-            'images' => !empty($images) ? $dataImages : asset('default.png'), // Return processed images array or default image
+            'image'=> $this->images != null ?  asset('uploads/advertisments/'.$this->images[0]) : asset('default.png'),
         ];
     }
 

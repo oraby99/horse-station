@@ -57,28 +57,13 @@ class AdvertismentController extends Controller
         }
         $data  = $this->model->where('ads_type','special')->where('is_active',true)->notExpire()->take(5)->latest()->get();
         $sign = $request->sign;
-        if ($data->isEmpty()) {
-            return response()->json(['data' => null, 'status' => 404, 'message' => "Not Found"], 404);
-        }
-        foreach ($data as $key) {
-            $key['price'] = $key->getPriceInCurrency($request->sign, $key->price);
-            $dataImages = [];
-
-            if ($key['images'] !== null) {
-                $decodedImages = json_decode($key['images']);
-
-                if (is_array($decodedImages) || is_object($decodedImages)) {
-                    foreach ($decodedImages as $image) {
-                        $dataImages[] = asset('uploads/advertisments/' . $image);
-                    }
-                }
-                $key['images'] = $dataImages;
-            }
-        }
         return response()->json([
-            'data' => $data,
-            'status' => 200,
-            'message' => 'Success'
+            'data'=> AdvertismentResource::collection($data->map(function ($product) use ($sign) {
+            $product->price = $product->getPriceInCurrency($sign , $product->price);
+            return $product;
+            })),
+            'status'=>200,
+            'message'=>'Success'
         ]);
     }
 

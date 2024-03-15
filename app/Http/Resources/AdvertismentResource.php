@@ -14,22 +14,16 @@ class AdvertismentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $images = json_decode($this->images); // Decode the JSON array of images
-        $dataImages = [];
-        if (!empty($images)) {
-            foreach ($images as $image) {
-                $dataImages[] = asset('uploads/advertisments/' . $image);
-            }
-        }
-
         return [
-            'id' => $this->id,
-            'category' => optional($this->category)->name,
-            'name' => $this->name,
-            'price' => $this->price,
-            'type' => 'advertisment',
+            'id'=>$this->id,
+            'name'=>$this->name,
+            'price'=> $this->price,
+            'category'=>optional($this->category)->name,
+            'type'=>'advertisment',
             'is_sold' => $this->is_sold,
-            'images' => !empty($images) ? $dataImages : asset('default.png'), // Return processed images array or default image
+            'image'=> $this->images != null ?  asset('uploads/advertisments/'.$this->images[0]) : asset('default.png'),
+
+
         ];
     }
 

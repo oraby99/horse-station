@@ -32,8 +32,8 @@ class Advertisment extends Model
 
         ];
         protected $casts = [
-            // 'images'=>'array',
-            // 'videos'=>'array',
+             'images'=>'array',
+             'videos'=>'array',
             'ads_type'=>AdvertismentStatus::class,
 
         ];
