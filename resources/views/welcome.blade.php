@@ -51,19 +51,8 @@
             @foreach ($ads as $ad)
             <div class="col-sm-3">
               <div class="card">
-                @if ($ad->images)
-                @php
-                    $decodedImages = json_decode($ad->images);
-                @endphp
+                <img src="{{ asset('uploads/advertisments/' . $prd->images[0]) }}" class="card-img-top" alt="...">
 
-                @if ($decodedImages && is_array($decodedImages) && count($decodedImages) > 0)
-                    <img src="{{ asset('uploads/advertisments/' . $decodedImages[0]) }}" class="card-img-top" alt="image">
-                @else
-                    <img src="{{ asset('path/to/default-image.jpg') }}" class="card-img-top" alt="default image">
-                @endif
-            @else
-                <img src="{{ asset('path/to/default-image.jpg') }}" class="card-img-top" alt="default image">
-            @endif
                             <div class="card-body">
                     <h5 class="card-title">{{$ad->name}}</h5>
                     @if ($ad->category)
