@@ -53,6 +53,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('edit-advertisement/{advertisement}', [AdvertismentController::class, 'update']);
     Route::post('advertisment/setsold',[AdvertismentController::class,'setAsSold']);
     Route::post('advertisment/setunsold',[AdvertismentController::class,'setAsUnSold']);
+    Route::post('/callback', [CartController::class, 'callback'])->name('callback');
 
     Route::group(['prefix'=>'favourite','controller'=>ProductController::class],function(){
          Route::get('/','favourite');

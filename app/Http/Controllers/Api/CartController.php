@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CartRequest;
 use App\Http\Resources\Api\CartResource;
+use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -48,10 +50,7 @@ class CartController extends Controller
             $data['colors']  = json_encode($data['colors']);
             $data['size']    = json_encode($data['size']);
             $data['user_id'] = auth()->user()->id;
-            //$data['qantity'] = $pr->stock;
-
             $cartItem = $this->model->firstOrCreate($data);
-
             return response()->json([
                 'status' => 200,
                 'message' => 'Created Successfully',
@@ -59,6 +58,25 @@ class CartController extends Controller
             ]);
         } else {
             return response()->json(['status' => 400, 'message' => 'This product is not found'], 400);
+        }
+    }
+    public function callback(Request $request)
+    {
+        $order = new Order();
+        $order->user_id         = auth()->id();
+        $order->address_id      = $request->address_id;
+        $order->total           = $request->total;
+        $order->shipment_status = $request->shipment_status;
+        $order->save();
+            if ($order->id) {
+            $cart = CartItem::where('user_id', auth()->id())->delete();
+            return response()->json([
+                'data'   => $order,
+                'status' => 200,
+                'message' => 'success'
+            ]);
+        } else {
+            return response()->json(["error" => 'error', 'status' => false], 404);
         }
     }
 

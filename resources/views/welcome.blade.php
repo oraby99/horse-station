@@ -5,7 +5,6 @@
     .zoom-effect {
         transition: transform 0.3s;
     }
-
     .zoom-effect:hover {
         transform: scale(1.1);
     }
@@ -23,7 +22,6 @@
                 @endforeach
             </div>
         </div>
-
         <div class="container">
             <h2>Featured Products</h2>
             <div class="row">
@@ -43,8 +41,6 @@
                 @endforeach
             </div>
         </div>
-
-        {{-- {{$ads}} --}}
         <div class="container">
         <h2>Featured Ads</h2>
         <div class="row">
@@ -54,8 +50,7 @@
                 @if ($ad->images && count($ad->images) > 0)
                 <img src="{{ asset('uploads/advertisments/' . $ad->images[0]) }}" class="card-img-top" alt="...">
                 @endif
-
-                            <div class="card-body">
+                    <div class="card-body">
                     <h5 class="card-title">{{$ad->name}}</h5>
                     @if ($ad->category)
                     <h5 class="card-title">{{$ad->category['name']}}</h5>
@@ -71,8 +66,6 @@
         @endforeach
         </div>
         </div>
-
-
 @endsection
 @section('script')
 <script>
