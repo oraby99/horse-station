@@ -34,7 +34,7 @@ class User extends Authenticatable
     ];
     public function carts()
     {
-        return $this->hasMany(Cart::class);
+        return $this->hasMany(CartItem::class);
     }
     public function address()
     {

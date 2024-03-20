@@ -11,24 +11,25 @@ class CartController extends Controller
 {
     public function addToCart(Request $request, $id)
     {
+       // dd($request->all());
         $request->validate([
-            'quantity' => 'required|integer|min:1',
+            'qantity' => 'required|integer|min:1',
             'size' => 'required',
             'color' => 'required',
         ]);
         $user = auth()->user();
         $cart = $user->carts->where('product_id', $id)->first();
         if ($cart) {
-            $cart->quantity += $request->quantity;
-            $cart->total = $request->price * $cart->quantity;
+            $cart->qantity += $request->qantity;
+            $cart->total = $request->price * $cart->qantity;
             $cart->save();
         } else {
             CartItem::create([
-                'product_id' => 1,
-                'quantity'  => $request->quantity,
+                'product_id' => $request->product_id,
+                'qantity'  => $request->qantity,
                 'user_id'   => $user->id,
-                'price'     => 100,
-                'total'     => $request->price * $request->quantity,
+                'price'     => $request->price,
+                'total'     => $request->price * $request->qantity,
                 'size'      => $request->size,
                 'color'     =>  $request->color,
             ]);

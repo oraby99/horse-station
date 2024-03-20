@@ -79,7 +79,6 @@ class CartController extends Controller
             return response()->json(["error" => 'error', 'status' => false], 404);
         }
     }
-
     public function addQuantity(Request $request)
     {
         $data = $this->model->findOrFail($request->id);
@@ -102,7 +101,7 @@ class CartController extends Controller
             'message'=>'success'
         ]);
     }
-        public function delete($id){
+    public function delete($id){
         $data  =$this->model->find($id)->delete();
         return response()->json([
             'message'=>'Deleted',

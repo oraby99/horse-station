@@ -70,9 +70,6 @@ use App\Http\Controllers\website\Auth\ForgetPasswordController;
         Route::post('/add-to-cart/{id}',   [ControllersCartController::class, 'addToCart'])->name('addToCart');
         Route::get('/cart',                [ControllersCartController::class, 'showCart'])->name('cart');
         Route::delete('/cart/{id}',        [ControllersCartController::class, 'removeItem'])->name('removeItem');
-        // Route::post('/checkout',        [FatoorahController::class, 'checkout'])->name('checkout');
-        // Route::get('/callback',         [FatoorahController::class, 'callback'])->name('callback');
-        // Route::get('/errorurl',         [FatoorahController::class, 'errorurl'])->name('errorurl');
         Route::post('/paymenttap',         [TapController::class, 'paymenttap'])->name('paymenttap');
         Route::get('/callbacktap',         [TapController::class, 'callbacktap'])->name('callbacktap');
 

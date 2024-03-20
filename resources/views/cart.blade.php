@@ -8,8 +8,6 @@
   <title>Document</title>
 </head>
 <body>
-
-
   <table class="table table-bordered table-striped">
     <thead class="thead-dark">
       <tr>
@@ -26,7 +24,7 @@
       @foreach ($cartItems as $index => $cartItem)
       <tr id="item{{$index}}">
         <td>{{ $cartItem->product->name }}</td>
-        <td id="quantity{{$index}}">{{ $cartItem->quantity }}</td>
+        <td id="qantity{{$index}}">{{ $cartItem->qantity }}</td>
         <td id="price{{$index}}">${{ $cartItem->price }}</td>
         <td>
           <form action="{{ route('removeItem', ['id' => $cartItem->id]) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this item from the cart?')">
@@ -37,7 +35,7 @@
       </td>
             </tr>
       @php
-        $totalPrice += $cartItem->quantity * $cartItem->price;
+        $totalPrice += $cartItem->qantity * $cartItem->total;
       @endphp
       @endforeach
     </tbody>
@@ -46,10 +44,6 @@
   @if($totalPrice > 0)
   <div class="checkout-section">
     <h3>Total: $<span id="totalPrice">{{ $totalPrice }}</span></h3>
-    {{-- <form action="{{ route('checkout') }}" method="post">
-      @csrf
-      <button class="btn btn-primary" type="submit">Complete Order</button>
-    </form> --}}
   </div>
 @else
   <p>No items in cart.</p>
