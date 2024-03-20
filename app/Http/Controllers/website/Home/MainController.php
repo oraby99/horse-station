@@ -60,34 +60,34 @@ class MainController extends Controller
     public function storeadd(Request $request)
     {
         $data = $request->all();
-        $data['user_id']   = auth()->user()->id;
+        $data['user_id'] = auth()->user()->id;
+
+        $imageNames = [];
         if ($request->hasFile('images')) {
-            if ($data['images'] !== null) {
-                $oldImagePath = public_path('uploads/advertisments/') . $data['images'] ;
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath);
-                }
+            foreach ($request->file('images') as $image) {
+                $newImageName = "advertisments-" . uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/advertisments/'), $newImageName);
+                $imageNames[] = $newImageName;
             }
-            $newImage = $request->file('images');
-            $newImageName = "advertisments-" . uniqid() . '.' . $newImage->getClientOriginalExtension();
-            $newImage->move(public_path('uploads/advertisments/'), $newImageName);
-            $data['images']  = $newImageName;
         }
+        $data['images'] = $imageNames;
+
         if ($request->hasFile('videos')) {
             if ($data['videos'] !== null) {
-                $oldImagePath = public_path('uploads/advertisments/') . $data['videos'] ;
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath);
+                $oldVideoPath = public_path('uploads/advertisments/') . $data['videos'] ;
+                if (file_exists($oldVideoPath)) {
+                    unlink($oldVideoPath);
                 }
             }
-            $newImage = $request->file('videos');
-            $newImageName = "advertisments-" . uniqid() . '.' . $newImage->getClientOriginalExtension();
-            $newImage->move(public_path('uploads/advertisments/'), $newImageName);
-            $data['videos']  = $newImageName;
+            $newVideo = $request->file('videos');
+            $newVideoName = "advertisments-" . uniqid() . '.' . $newVideo->getClientOriginalExtension();
+            $newVideo->move(public_path('uploads/advertisments/'), $newVideoName);
+            $data['videos'] = $newVideoName;
         }
+
         $ads = Advertisment::create($data);
-        return redirect()->back()->with(['success' => 'Ads added succesfully !']);
-        return $ads;
+        return redirect()->back()->with(['success' => 'Ads added successfully!']);
     }
+
 }
 

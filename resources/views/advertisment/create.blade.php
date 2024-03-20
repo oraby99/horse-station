@@ -109,24 +109,12 @@
                                           </div>
                                           <div class="col-sm-9 col-12">
                                             <div class="form-group">
-                                                <input  type="number" class="form-control" value="" name="age" id=""
+                                                <input   type="number" class="form-control" value="" name="age" id=""
                                                 >
                                             </div>
                                           </div>
                                         </div>
                                     </div>
-                                    {{-- <div id="rtcl-ad-name" style="display: none;">
-                                        <div class="row" id="">
-                                          <div class="col-sm-3 col-12">
-                                            <label class="control-label">horse name<span></span></label>
-                                          </div>
-                                          <div class="col-sm-9 col-12">
-                                            <div class="form-group">
-                                                <input  type="text" class="form-control" value="" name="name" >
-                                            </div>
-                                          </div>
-                                        </div>
-                                    </div> --}}
                                     <div id="rtcl-ad-name" style="display: none;">
                                         <div class="row" id="">
                                           <div id="service-name" class="col-sm-3 col-12">
@@ -176,7 +164,7 @@
                                           </div>
                                           <div class="col-sm-9 col-12">
                                             <div class="form-group">
-                                                <input  type="text" class="form-control" value="" name="phone" id="">
+                                                <input required type="text" class="form-control" value="" name="phone" id="">
                                             </div>
                                           </div>
                                         </div>
@@ -188,7 +176,7 @@
                                           </div>
                                           <div class="col-sm-9 col-12">
                                             <div class="form-group">
-                                                <input  type="number" class="form-control" value="" name="price" id=""
+                                                <input required type="number" class="form-control" value="" name="price" id=""
                                                 >
                                             </div>
                                           </div>
@@ -202,7 +190,7 @@
                                           </div>
                                           <div class="col-sm-9 col-12">
                                             <div class="form-group">
-                                                <input  type="file" class="form-control" value="" name="images" id=""
+                                                <input   type="file" class="form-control" value="" name="images" id=""
                                                 >
                                             </div>
                                           </div>

@@ -2,6 +2,18 @@
 @section('body_class','home page-template page-template-templates page-template-blank page-template-templatesblank-php page page-id-1897 wp-custom-logo rtcl-no-js ehf-header ehf-footer ehf-template-classima ehf-stylesheet-classima header-style-2 footer-style-1 no-sidebar elementor-default elementor-kit-2161 elementor-page elementor-page-1897')
 @section('content')
 <style>
+    .carousel-container {
+    position: relative;
+}
+.centered-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(100, 100, 100, 0.4);
+    padding: 40px;
+    width: 100%;
+}
     .zoom-effect {
         transition: transform 0.3s;
     }
@@ -9,20 +21,55 @@
         transform: scale(1.1);
     }
 </style>
-<br>
-<br>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-container">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="assets/images/pedramezzati_a_commercial_poster_for_website_horse_training__bl_cdf22caf-b057-4e99-ac58-5e0873f96a43-1 (1).png" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="assets/images/pedramezzati_a_commercial_poster_for_website_horse_training_col_dfd363ab-5eda-4820-b553-890f51ec89e2-1 (1).png" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="assets/images/pedramezzati_a_commercial_poster_for_website_horse_training__bl_dd359dc4-ea5e-4e4e-95ef-d9e5842996f4.png" alt="Third slide">
+                </div>
+            </div>
+        </div>
+        <div class="centered-content">
+            <div class="w-100">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <input type="text" class="form-control search" placeholder="Search.."/>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <input type="text" class="form-control search" placeholder="Search.."/>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <input type="text" class="form-control search" placeholder="Search.."/>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1">
+                    <button class="btn" style="background-color: rgb(148, 129, 93); color: white">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <br>
         <div class="container">
             <div class="row">
                 @foreach ($categroy as $cat)
                     @if ($cat->parent_id == null)
-                        <div class="col-lg-3 zoom-effect" style="height:305px ; background-image: url('{{ asset('uploads/categories/' . $cat->image) }}'); background-repeat: no-repeat; padding: 10px; color: white;">
+                        <div class="col-lg-3 zoom-effect" style="height:200px ; background-image: url('{{ asset('uploads/categories/' . $cat->image) }}'); background-repeat: no-repeat; color: white;">
                             <h1 style="color: white">{{$cat->name}}</h1>
                         </div>
                     @endif
                 @endforeach
             </div>
         </div>
-        <div class="container">
+        <div class="container" style="margin-top: -25px">
             <h2>Featured Products</h2>
             <div class="row">
                 @foreach ($products as $prd)
