@@ -33,6 +33,7 @@ class TapController extends Controller
         $output = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($output);
+        // dd($response);
         return redirect($response->transaction->url);
     }
     public function callbacktap(Request $request)

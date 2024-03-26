@@ -21,10 +21,10 @@ class CartItem extends Model
     {
         $currency = Country::where('sign', $currencySign)->first();
         if (!$currency) {
-            throw new \Exception("Currency not supported");
+            $currency = Country::first();
         }
-        $convertedPrice = $price / $currency->currency;
-        return $convertedPrice;
+        $convertedPrice = $price * $currency->currency;
+        return number_format($convertedPrice, 2);
     }
 
     public function product()

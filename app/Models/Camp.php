@@ -61,7 +61,7 @@ class Camp extends Model implements TranslatableContract
         if (!$currency) {
             $currency = Country::first();
         }
-        $convertedPrice = $price / $currency->currency;
+        $convertedPrice = $price * $currency->currency;
         return $convertedPrice;
     }
 

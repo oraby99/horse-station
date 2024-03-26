@@ -77,18 +77,18 @@ class AdvertismentController extends Controller
         $data = $this->model->find($id);
         if ($data) {
             $data['price'] = $data->getPriceInCurrency($request->sign, $data->price);
-            $dataImages = [];
-            if ($data['images'] !== null) {
-                $decodedImages = json_decode($data['images']);
-                if (is_array($decodedImages) || is_object($decodedImages)) {
-                    foreach ($decodedImages as $image) {
-                        $dataImages[] = asset('uploads/advertisments/' . $image);
-                    }
-                }
-                $data['images'] = $dataImages;
-            }
+            // $dataImages = [];
+            // if ($data['images'] !== null) {
+            //     $decodedImages = json_decode($data['images']);
+            //     if (is_array($decodedImages) || is_object($decodedImages)) {
+            //         foreach ($decodedImages as $image) {
+            //             $dataImages[] = asset('uploads/advertisments/' . $image);
+            //         }
+            //     }
+            //     $data['images'] = $dataImages;
+            // }
             return response()->json([
-                'data' => $data,
+                'data' => new AdvertismentDetailsResource($data),
                 'status' => 200,
                 'message' => 'Success'
             ]);

@@ -33,7 +33,8 @@ class CartController extends Controller
         return response()->json([
             'status'=>200,
             'data'=>CartResource::collection($data->map(function ($product) use ($sign) {
-                $product->product->price = $product->getPriceInCurrency($sign,  $product->product->price);
+                $product['price'] = $product->getPriceInCurrency($sign,  $product->product->price);
+                $product['price_in_kwd'] = $product->product->price;                
                 return $product;
                 })),
             'deliver'=> 5,
@@ -68,6 +69,8 @@ class CartController extends Controller
         $order->total           = $request->total;
         $order->shipment_status = $request->shipment_status;
         $order->save();
+
+        // gateway //
             if ($order->id) {
             $cart = CartItem::where('user_id', auth()->id())->delete();
             return response()->json([

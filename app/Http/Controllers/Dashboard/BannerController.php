@@ -21,7 +21,7 @@ class BannerController extends Controller
     }
     public function index()
     {
-        $data = $this->model->all();
+        $data = $this->model->latest()->get();
         return view('dashboard.banners.index',['data'=>$data]);
     }
     public function create()
@@ -81,7 +81,7 @@ class BannerController extends Controller
     // Api //
 
     public function getAll(){
-        $data = $this->model->all();
+        $data = $this->model->latest()->get();
         return response()->json([
             'data'=>BannerResource::collection($data),
             'status'=>200,

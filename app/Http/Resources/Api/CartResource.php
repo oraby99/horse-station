@@ -25,7 +25,8 @@ class CartResource extends JsonResource
             'image' => $this->product->images != null ? asset('uploads/products/'.$this->product->images[0]) : asset('default.png'),
             'count' => (int)$this->qantity,
             'stock' => $this->product->stock,
-            'total' => number_format((float)$this->product->price * $this->qantity, 2),
+            'total' => number_format((float)$this->price * $this->qantity, 2),
+            'total_kwd' => number_format((float)$this->price_in_kwd * $this->qantity, 2),
         ];
     }
 
