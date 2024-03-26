@@ -33,13 +33,17 @@
                         <tr>
                             
                             <th>Image</th>
+                            <th>Order</th>
+
                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach ($data as $item)
                         <tr>
-                            <td><img src="{{asset('uploads/banners/'.$item->image)}}" alt=""></td>
+                            <td><img src="{{asset('uploads/banners/'.$item->image)}}" class="img-thumbnail" width="150px" height="100px" alt=""></td>
+                            <td><input type="text"  name="order" required onchange="editOrder({{$item->id}},event)" value="{{$item->order}}" class="form-control"></td>
+
                             <td>
                                 <a href="{{route('admin.banner.edit',$item->id)}}" class="btn btn-primary"><i class="fa fa-pen"></i></a>
                                 <a href="{{route('admin.banner.delete',$item->id)}}" class="btn btn-danger delete-confirm"><i class="fa fa-trash"></i></a>
@@ -60,5 +64,25 @@
 @section('scripts')
 <script>
     $('#datatable-buttons').DataTable();
+</script>
+
+<script>
+    function editOrder(id,e)
+    {
+        order = e.target.value;
+        $.ajax({
+            type: 'GET',
+            url: "{{route('admin.banner.edit.order')}}",
+            data: {id:id,order:order},
+            dataType: 'JSON',
+            success: function (results) {
+                toastr.success('Done', 'Order Update');
+            },
+            error:function(result){
+                console.log(result);
+                toastr.error('Error Accure', 'Error');
+            }
+        });
+    }
 </script>
 @endsection

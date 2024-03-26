@@ -15,7 +15,8 @@ class BannerResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'image'=>asset('uploads/banners/'.$this->image)
+            'image'=>asset('uploads/banners/'.$this->image),
+            'order'=>$this->order
         ];
     }
 }

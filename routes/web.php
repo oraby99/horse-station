@@ -118,6 +118,8 @@ use App\Http\Controllers\website\Auth\ForgetPasswordController;
         Route::get('delete/{id}','delete')->name('admin.banner.delete');
         Route::post('update/{id}','update')->name('admin.banner.update');
         Route::post('store','store')->name('admin.banner.store');
+        Route::get('edit-order','updateOrder')->name('admin.banner.edit.order');
+
     });
     Route::group(['prefix'=>'plan','controller'=>PlanController::class],function(){
         Route::get('/','index')->name('admin.plan.index');

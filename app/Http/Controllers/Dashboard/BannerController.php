@@ -78,10 +78,29 @@ class BannerController extends Controller
     }
 
 
+
+    public function updateOrder(Request $request)
+    {
+        $data = $this->model->findOrFail($request->id);
+        if($data->update([
+            'order'=>$request->order
+        ])){
+            return response()->json([
+                'status'=>200,
+                'msg'=>'Success'
+            ]);
+        } else{
+            return response()->json([
+                'status'=>400,
+                'msg'=>'Error'
+            ],400);
+        }
+    }
+
     // Api //
 
     public function getAll(){
-        $data = $this->model->latest()->get();
+        $data = $this->model->orderBy('order')->get();
         return response()->json([
             'data'=>BannerResource::collection($data),
             'status'=>200,
